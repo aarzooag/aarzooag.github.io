@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     HOW TO CUSTOMIZE
+     - Search "EDIT:" for things to update
+     - Your photo goes in the poster at the top (see EDIT there).
+       For the black & white look from your inspiration, un-comment
+       the "filter: grayscale(100%);" line in the .poster-photo CSS
+     - The handwritten annotations around the photo are just text —
+       edit them freely
+     ============================================================ -->
+<title>Aarzoo Aggarwal</title>
+<meta name="description" content="EECS at Stanford — secure systems, cryptography, math, and hardware-software design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EAF2F8;   /* light blue background */
+    --ink: #182635;     /* dark navy text */
+    --slate: #5B7183;   /* secondary text */
+    --accent: #1A5FB4;  /* deep blue display type */
+    --mist: #CFDEE9;    /* hairlines */
+    --max: 720px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background:
+      radial-gradient(700px 480px at 82% -60px, rgba(255, 255, 255, 0.75), transparent 70%),
+      linear-gradient(180deg, #DCEAF5 0%, var(--paper) 520px);
+    background-repeat: no-repeat;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  a { color: var(--ink); }
+  a:hover { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* small spaced-caps labels (corners, nav) */
+  .label {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* handwritten */
+  .hand {
+    font-family: "Shadows Into Light Two", cursive;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- header ---------- */
+  header { padding: 26px 0; }
+  header .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  nav { display: flex; gap: 26px; }
+  nav a { text-decoration: none; }
+
+  /* ---------- poster hero ---------- */
+  .poster {
+    position: relative;
+    max-width: 680px;
+    min-height: 460px;
+    margin: 26px auto 0;
+    padding: 40px 24px 0;
+    text-align: center;
+  }
+  .display {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(72px, 15vw, 128px);
+    line-height: 0.9;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 0;
+  }
+  .poster-photo {
+    position: relative;
+    z-index: 1;
+    width: min(250px, 60vw);
+    margin: 0 auto;
+  }
+  .poster-photo img, .poster-photo .ph {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    /* filter: grayscale(100%); */  /* EDIT: un-comment for the B&W look */
+  }
+  .poster-photo .ph {
+    background: #FFFFFF;
+    border: 1px solid var(--mist);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--slate);
+    font-family: Arial, sans-serif; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .display-under {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: clamp(44px, 9vw, 72px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+    margin-top: -20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* handwritten annotations around the photo */
+  .annot {
+    position: absolute;
+    font-family: "Shadows Into Light Two", cursive;
+    font-size: 19px;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    max-width: 150px;
+    line-height: 1.35;
+    z-index: 2;
+  }
+  .annot svg {
+    position: absolute;
+    width: 48px;
+    height: 34px;
+    color: var(--ink);
+    overflow: visible;
+  }
+  /* left labels: arrow points from label's right edge toward the photo */
+  .a1 { top: 22%; left: 4%; text-align: right; transform: rotate(-3deg); }
+  .a1 svg { right: -46px; top: 50%; }
+  .a3 { top: 58%; left: 2%; text-align: right; transform: rotate(-2deg); }
+  .a3 svg { right: -46px; top: 30%; }
+  /* right labels: arrow points from label's left edge toward the photo */
+  .a2 { top: 20%; right: 4%; text-align: left; transform: rotate(3deg); }
+  .a2 svg { left: -46px; top: 50%; }
+  .a4 { top: 56%; right: 2%; text-align: left; transform: rotate(2deg); }
+  .a4 svg { left: -46px; top: 30%; }
+
+  /* little doodles */
+  .doodle { position: absolute; color: var(--ink); z-index: 2; }
+  .d-star1 { top: 12%; left: 8%; width: 16px; transform: rotate(14deg); }
+  .d-star2 { top: 10%; right: 10%; width: 11px; transform: rotate(-9deg); }
+  .d-swirl { bottom: 4%; left: 4%; width: 30px; transform: rotate(-8deg); }
+  .d-star3 { bottom: 10%; right: 6%; width: 14px; transform: rotate(20deg); }
+
+  .poster-tagline {
+    margin: 34px auto 0;
+    max-width: 54ch;
+    font-size: 18px;
+  }
+  .mission {
+    margin-top: 20px;
+    font-size: 23px;
+    color: var(--accent);
+    transform: rotate(-1.5deg);
+  }
+
+  /* ---------- sections ---------- */
+  main section { padding: 58px 0; }
+  main section .wrap { max-width: 640px; }
+  h2 {
+    font-family: "Shadows Into Light Two", cursive;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2 .h-doodle { width: 17px; height: 17px; color: var(--accent); flex-shrink: 0; }
+
+  .prose p { margin-bottom: 18px; max-width: 58ch; }
+  .prose p:last-of-type { margin-bottom: 0; }
+
+  /* ---------- research ---------- */
+  .paper { margin-bottom: 30px; max-width: 60ch; }
+  .paper:last-of-type { margin-bottom: 0; }
+  .paper h3 {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+  .paper .note {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: var(--slate);
+    margin-top: 4px;
+  }
+
+  /* ---------- contact ---------- */
+  .contact .links { margin-top: 18px; display: flex; gap: 30px; flex-wrap: wrap; }
+  .contact .links a { text-decoration: none; border-bottom: 1px solid var(--mist); padding-bottom: 2px; }
+  .contact .links a:hover { border-bottom-color: var(--accent); }
+  .say-hi {
+    font-family: "Shadows Into Light Two", cursive;
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    margin-top: 34px;
+    transform: rotate(-2deg);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .say-hi svg { width: 40px; height: 26px; }
+
+  /* ---------- footer ---------- */
+  footer { padding: 40px 0 44px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* ---------- motion ---------- */
+  .rise { animation: rise 0.7s ease both; }
+  .rise.d1 { animation-delay: 0.1s; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+  }
+  section .wrap.reveal-hidden { opacity: 0; transform: translateY(14px); }
+  section .wrap.reveal-shown {
+    opacity: 1; transform: none;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rise { animation: none; }
+  }
+
+  /* ---------- mobile: annotations flow around instead of floating ---------- */
+  @media (max-width: 640px) {
+    .annot { position: static; display: inline-block; max-width: none; margin: 10px 12px 0; text-align: center; }
+    .annot svg { display: none; }
+    .a1, .a2, .a3, .a4 { transform: rotate(-2deg); }
+    .a2, .a4 { transform: rotate(2deg); }
+    .doodle { display: none; }
+    .display-under { margin-top: -12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="label">Aarzoo Aggarwal</span>
+    <nav class="label">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="poster rise">
+
+    <!-- handwritten annotations with arrows pointing at the photo -->
+    <div class="annot a1">grew up in Colorado &amp; Kansas
+      <!-- left label → arrow curves right toward photo -->
+      <svg viewBox="0 0 48 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6 C 18 4, 32 14, 44 26"/><path d="M44 26l-9 -1M44 26l-2 -9"/></svg>
+    </div>
+    <div class="annot a2">EECS @ Stanford
+      <!-- right label → arrow curves left toward photo -->
+      <svg viewBox="0 0 48 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M46 6 C 30 4, 16 14, 4 26"/><path d="M4 26l9 -1M4 26l2 -9"/></svg>
+    </div>
+    <div class="annot a3">security &amp; crypto research
+      <!-- left label → arrow curves right & up toward photo -->
+      <svg viewBox="0 0 48 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 28 C 18 30, 32 20, 44 8"/><path d="M44 8l-9 1M44 8l-2 9"/></svg>
+    </div>
+    <div class="annot a4">crochet, art, &amp; the daily crossword
+      <!-- right label → arrow curves left & up toward photo -->
+      <svg viewBox="0 0 48 34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M46 28 C 30 30, 16 20, 4 8"/><path d="M4 8l9 1M4 8l2 9"/></svg>
+    </div>
+
+    <!-- doodles -->
+    <svg class="doodle d-star1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/></svg>
+    <svg class="doodle d-star2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z"/></svg>
+    <svg class="doodle d-swirl" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M2 18 C 6 6, 12 6, 14 12 C 16 18, 22 18, 24 12 C 26 6, 32 6, 38 10"/></svg>
+    <svg class="doodle d-star3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+
+    <div class="poster-photo">
+      <!-- EDIT: replace this placeholder with your photo, e.g.
+           <img src="images/aarzoo.jpg" alt="Aarzoo Aggarwal"> -->
+      <div class="ph">your photo</div>
+    </div>
+  </div>
+
+  <div class="poster-tagline wrap rise d1">
+    I'm an EECS student at Stanford with broad interests in secure systems,
+    cryptography research, math, and hardware&#8209;software design. I enjoy
+    interdisciplinary work, creative problem-solving, and hard puzzles that
+    connect ideas across different technical domains.
+    <div class="mission hand">I want to find the hardest puzzles and work on solving them.</div>
+  </div>
+
+  <section id="about">
+    <div class="wrap prose">
+      <h2><svg class="h-doodle" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z"/></svg>About</h2>
+      <!-- EDIT: rewrite any line so it sounds like you -->
+      <p>
+        Right now I do security research with Dr. Emma Dauterman on
+        differential privacy for AI usage data. Last summer I wrote flight
+        software at Matter Intelligence, a satellite imaging startup, and
+        before that I worked with NASA JPL on using radio bursts from
+        Jupiter for passive radar sounding.
+      </p>
+      <p>
+        Outside of engineering, I crochet, make art projects, and do a lot
+        of puzzles — the daily crossword, jigsaws, math problems, whatever's
+        around.
+      </p>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <h2><svg class="h-doodle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 2v20M2 12h20M5.5 5.5l13 13M18.5 5.5l-13 13"/></svg>Research</h2>
+      <article class="paper">
+        <h3>Privately Analyzing AI Usage with Glimpse</h3>
+        <p class="note">submitted to IEEE S&amp;P 2027 &nbsp;·&nbsp; Stanford Security Lab, with Dr. Emma Dauterman</p>
+        <!-- EDIT: wrap the h3 in a link when the paper is online -->
+      </article>
+      <article class="paper">
+        <h3>PANTHER — Passive Radar Sounding with Jovian Radio Bursts</h3>
+        <p class="note">published at AGU &nbsp;·&nbsp; NASA JPL &times; CU Colorado Center for Astrodynamics</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2><svg class="h-doodle" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 6 4 9 10 10-6 1-9 4-10 10-1-6-4-9-10-10 6-1 9-4 10-10z"/></svg>Contact</h2>
+      <p>Email is the best way to reach me.</p>
+      <div class="links">
+        <a href="mailto:aarzooag@stanford.edu">aarzooag@stanford.edu</a>
+        <!-- EDIT: add your GitHub link -->
+        <a href="https://github.com/yourusername">GitHub</a>
+        <a href="https://www.linkedin.com/in/aarzoo-aggarwal-3874a0276/">LinkedIn</a>
+      </div>
+      <div class="say-hi">let's talk — send me an email!
+        <svg viewBox="0 0 48 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 24 C 16 26, 30 20, 43 8"/><path d="M43 8l-8 0M43 8l-2 8"/></svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="label">&copy; 2026 Aarzoo Aggarwal</span>
+    <span class="hand" style="font-size:19px;">thanks for stopping by :)</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduced && "IntersectionObserver" in window) {
+    var wraps = document.querySelectorAll("section .wrap");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("reveal-hidden");
+          entry.target.classList.add("reveal-shown");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    wraps.forEach(function (w) {
+      var r = w.getBoundingClientRect();
+      if (r.top > window.innerHeight) {
+        w.classList.add("reveal-hidden");
+        io.observe(w);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
